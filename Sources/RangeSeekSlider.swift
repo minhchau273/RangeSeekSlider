@@ -8,6 +8,11 @@
 
 import UIKit
 
+public enum HandleType {
+  case left
+  case right
+}
+
 @IBDesignable open class RangeSeekSlider: UIControl {
 
     // MARK: - initializers
@@ -698,6 +703,14 @@ import UIKit
         updateLabelPositions()
 
         CATransaction.commit()
+    }
+
+    open func addShadow(forHandle handleType: HandleType, y: CGFloat, blur: CGFloat, opacity: Float) {
+        let handle = handleType == .left ? leftHandle : rightHandle
+        handle.shadowOpacity = opacity
+        handle.shadowOffset = CGSize(width: 0, height: y)
+        handle.shadowRadius = blur
+        handle.isGeometryFlipped = false
     }
 }
 
