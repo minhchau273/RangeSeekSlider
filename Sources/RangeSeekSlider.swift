@@ -226,6 +226,8 @@ public enum HandleType {
     /// The brief description displayed in accessibility mode for maximum value handler. If not set, the default is empty String.
     @IBInspectable open var maxLabelAccessibilityHint: String?
 
+    /// Disable scaling transform for handler when sliding
+    open var disableAnimationWhenSliding = false
 
     // MARK: - private stored properties
 
@@ -320,8 +322,9 @@ public enum HandleType {
             handleTracking = .right
         }
         let handle: CALayer = (handleTracking == .left) ? leftHandle : rightHandle
-        animate(handle: handle, selected: true)
-
+        if !disableAnimationWhenSliding {
+            animate(handle: handle, selected: true)
+        }
         delegate?.didStartTouches(in: self)
 
         return true
@@ -360,7 +363,9 @@ public enum HandleType {
 
     open override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         let handle: CALayer = (handleTracking == .left) ? leftHandle : rightHandle
-        animate(handle: handle, selected: false)
+        if !disableAnimationWhenSliding {
+            animate(handle: handle, selected: false)
+        }
         handleTracking = .none
 
         delegate?.didEndTouches(in: self)
