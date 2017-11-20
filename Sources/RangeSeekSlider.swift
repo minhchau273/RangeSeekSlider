@@ -13,7 +13,7 @@ public enum HandleType {
   case right
 }
 
-@IBDesignable open class RangeSeekSlider: UIControl {
+open class RangeSeekSlider: UIControl {
 
     // MARK: - initializers
 
@@ -40,14 +40,14 @@ public enum HandleType {
     open weak var delegate: RangeSeekSliderDelegate?
 
     /// The minimum possible value to select in the range
-    @IBInspectable open var minValue: CGFloat = 0.0 {
+    open var minValue: CGFloat = 0.0 {
         didSet {
             refresh()
         }
     }
 
     /// The maximum possible value to select in the range
-    @IBInspectable open var maxValue: CGFloat = 100.0 {
+    open var maxValue: CGFloat = 100.0 {
         didSet {
             refresh()
         }
@@ -55,7 +55,7 @@ public enum HandleType {
 
     /// The preselected minumum value
     /// (note: This should be less than the selectedMaxValue)
-    @IBInspectable open var selectedMinValue: CGFloat = 0.0 {
+    open var selectedMinValue: CGFloat = 0.0 {
         didSet {
             if selectedMinValue < minValue {
                 selectedMinValue = minValue
@@ -65,7 +65,7 @@ public enum HandleType {
 
     /// The preselected maximum value
     /// (note: This should be greater than the selectedMinValue)
-    @IBInspectable open var selectedMaxValue: CGFloat = 100.0 {
+    open var selectedMaxValue: CGFloat = 100.0 {
         didSet {
             if selectedMaxValue > maxValue {
                 selectedMaxValue = maxValue
@@ -99,7 +99,7 @@ public enum HandleType {
     }()
 
     /// Hides the labels above the slider controls. true = labels will be hidden. false = labels will be shown. Default is false.
-    @IBInspectable open var hideLabels: Bool = false {
+    open var hideLabels: Bool = false {
         didSet {
             minLabel.isHidden = hideLabels
             maxLabel.isHidden = hideLabels
@@ -107,10 +107,10 @@ public enum HandleType {
     }
 
     /// fixes the labels above the slider controls. true: labels will be fixed to both ends. false: labels will move with the handles. Default is false.
-    @IBInspectable open var labelsFixed: Bool = false
+    open var labelsFixed: Bool = false
 
     /// The minimum distance the two selected slider values must be apart. Default is 0.
-    @IBInspectable open var minDistance: CGFloat = 0.0 {
+    open var minDistance: CGFloat = 0.0 {
         didSet {
             if minDistance < 0.0 {
                 minDistance = 0.0
@@ -119,7 +119,7 @@ public enum HandleType {
     }
 
     /// The maximum distance the two selected slider values must be apart. Default is CGFloat.greatestFiniteMagnitude.
-    @IBInspectable open var maxDistance: CGFloat = .greatestFiniteMagnitude {
+    open var maxDistance: CGFloat = .greatestFiniteMagnitude {
         didSet {
             if maxDistance < 0.0 {
                 maxDistance = .greatestFiniteMagnitude
@@ -128,26 +128,26 @@ public enum HandleType {
     }
 
     /// The color of the minimum value text label. If not set, the default is the tintColor.
-    @IBInspectable open var minLabelColor: UIColor?
+    open var minLabelColor: UIColor?
 
     /// The color of the maximum value text label. If not set, the default is the tintColor.
-    @IBInspectable open var maxLabelColor: UIColor?
+    open var maxLabelColor: UIColor?
 
     /// Handle slider with custom color, you can set custom color for your handle
-    @IBInspectable open var handleColor: UIColor?
+    open var handleColor: UIColor?
 
     /// Handle slider with custom border color, you can set custom border color for your handle
-    @IBInspectable open var handleBorderColor: UIColor?
+    open var handleBorderColor: UIColor?
 
     /// Set slider line tint color between handles
-    @IBInspectable open var colorBetweenHandles: UIColor?
+    open var colorBetweenHandles: UIColor?
 
     /// The color of the entire slider when the handle is set to the minimum value and the maximum value. Default is nil.
-    @IBInspectable open var initialColor: UIColor?
+    open var initialColor: UIColor?
 
     /// If true, the control will mimic a normal slider and have only one handle rather than a range.
     /// In this case, the selectedMinValue will be not functional anymore. Use selectedMaxValue instead to determine the value the user has selected.
-    @IBInspectable open var disableRange: Bool = false {
+    open var disableRange: Bool = false {
         didSet {
             leftHandle.isHidden = disableRange
             minLabel.isHidden = disableRange
@@ -155,14 +155,14 @@ public enum HandleType {
     }
 
     /// If true the control will snap to point at each step between minValue and maxValue. Default is false.
-    @IBInspectable open var enableStep: Bool = false
+    open var enableStep: Bool = false
 
     /// The step value, this control the value of each step. If not set the default is 0.0.
     /// (note: this is ignored if <= 0.0)
-    @IBInspectable open var step: CGFloat = 0.0
+    open var step: CGFloat = 0.0
 
     /// Handle slider with custom image, you can set custom image for your handle
-    @IBInspectable open var handleImage: UIImage? {
+    open var handleImage: UIImage? {
         didSet {
             guard let image = handleImage else {
                 return
@@ -180,7 +180,7 @@ public enum HandleType {
     }
 
     /// Handle diameter (default 16.0)
-    @IBInspectable open var handleDiameter: CGFloat = 16.0 {
+    open var handleDiameter: CGFloat = 16.0 {
         didSet {
             leftHandle.cornerRadius = handleDiameter / 2.0
             rightHandle.cornerRadius = handleDiameter / 2.0
@@ -190,17 +190,17 @@ public enum HandleType {
     }
 
     /// Selected handle diameter multiplier (default 1.7)
-    @IBInspectable open var selectedHandleDiameterMultiplier: CGFloat = 1.7
+    open var selectedHandleDiameterMultiplier: CGFloat = 1.7
 
     /// Set the slider line height (default 1.0)
-    @IBInspectable open var lineHeight: CGFloat = 1.0 {
+    open var lineHeight: CGFloat = 1.0 {
         didSet {
             updateLineHeight()
         }
     }
 
     /// Handle border width (default 0.0)
-    @IBInspectable open var handleBorderWidth: CGFloat = 0.0 {
+    open var handleBorderWidth: CGFloat = 0.0 {
         didSet {
             leftHandle.borderWidth = handleBorderWidth
             rightHandle.borderWidth = handleBorderWidth
@@ -208,23 +208,23 @@ public enum HandleType {
     }
 
     /// Set padding between label and handle (default 8.0)
-    @IBInspectable open var labelPadding: CGFloat = 8.0 {
+    open var labelPadding: CGFloat = 8.0 {
         didSet {
             updateLabelPositions()
         }
     }
 
     /// The label displayed in accessibility mode for minimum value handler. If not set, the default is empty String.
-    @IBInspectable open var minLabelAccessibilityLabel: String?
+    open var minLabelAccessibilityLabel: String?
 
     /// The label displayed in accessibility mode for maximum value handler. If not set, the default is empty String.
-    @IBInspectable open var maxLabelAccessibilityLabel: String?
+    open var maxLabelAccessibilityLabel: String?
 
     /// The brief description displayed in accessibility mode for minimum value handler. If not set, the default is empty String.
-    @IBInspectable open var minLabelAccessibilityHint: String?
+    open var minLabelAccessibilityHint: String?
 
     /// The brief description displayed in accessibility mode for maximum value handler. If not set, the default is empty String.
-    @IBInspectable open var maxLabelAccessibilityHint: String?
+    open var maxLabelAccessibilityHint: String?
 
     /// Disable scaling transform for handler when sliding
     open var disableAnimationWhenSliding = false
